@@ -12,7 +12,7 @@ object Application extends Controller {
     implicit request =>
     val address =  request.remoteAddress
     Logger.info("address " + address)
-    val json = ipInfo(address, "")
+    val json = ipInfo(address, " ")
   Ok("Got request [" + address +json+ "]")
   }
   
