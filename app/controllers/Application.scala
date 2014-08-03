@@ -15,6 +15,7 @@ object Application extends Controller {
    var macAddress = Array.empty[Byte]
 
     Logger.info("address " + address)
+    val Address1 = InetAddress.getLocalHost()
     val localNetworkInterface = NetworkInterface.getNetworkInterfaces
     while (localNetworkInterface.hasMoreElements) {
   val element = localNetworkInterface.nextElement
@@ -24,7 +25,7 @@ object Application extends Controller {
 }
     val json = ipInfo(address, " ")
     
-  Ok("Got request [" + address + macAddress+ "]")
+  Ok("Got request [" + address + Address1+ macAddress+ "]")
   }
   
   def ipInfo(ip: String, key: String) = {
