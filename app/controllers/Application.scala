@@ -3,7 +3,8 @@ package controllers
 import play.api._
 import play.api.mvc._
 import java.net._
-
+import scala.collection.JavaConverters._
+import java.net.NetworkInterface
 
 object Application extends Controller {
 
@@ -11,9 +12,19 @@ object Application extends Controller {
  
     implicit request =>
     val address =  request.remoteAddress
+   var macAddress = Array.empty[Byte]
+
     Logger.info("address " + address)
+    val localNetworkInterface = NetworkInterface.getNetworkInterfaces
+    while (localNetworkInterface.hasMoreElements) {
+  val element = localNetworkInterface.nextElement
+  if (element.getDisplayName.equalsIgnoreCase("eth0")) {
+    macAddress = element.getHardwareAddress
+  }
+}
     val json = ipInfo(address, " ")
-  Ok("Got request [" + address +json+ "]")
+    
+  Ok("Got request [" + address + macAddress+ "]")
   }
   
   def ipInfo(ip: String, key: String) = {
