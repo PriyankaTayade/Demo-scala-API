@@ -47,13 +47,15 @@ object Application extends Controller {
 val userForm = Form(
   tuple(
     "ip" -> text,
+    "lat" -> text,
+    "long" -> text,
     "sub" -> text
   )
 )
  def getIp() = Action {
      implicit request =>
-     val (ip, sub) = userForm.bindFromRequest.get
-     Ok("Got request ["+ip+"]")
+     val (ip, lat, long, sub) = userForm.bindFromRequest.get
+     Ok("Got request ["+ip+ " " +lat+" "+long+"]")
  }
  
  
