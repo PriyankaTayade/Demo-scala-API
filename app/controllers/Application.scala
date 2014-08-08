@@ -56,7 +56,7 @@ val userForm = Form(
  def getIp() = Action {
      implicit request =>
      val (ip, mac, device,serial, sub) = userForm.bindFromRequest.get
-     Ok("Got request ["+ip+ " " +lat+" "+long+" "+ serial+"]")
+     Ok("Got request ["+ip+ " " +mac+" "+device+" "+ serial+"]")
  }
  
  
